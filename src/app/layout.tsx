@@ -1,11 +1,8 @@
-import './globals.css'
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({ subsets: ['latin'] })
+import "./globals.css"
 
 export const metadata = {
-  title: 'Cleet Code',
-  description: 'Clone of leetcode',
+  title: "Cleet Code",
+  description: "Clone of leetcode",
 }
 
 export default function RootLayout({
@@ -15,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

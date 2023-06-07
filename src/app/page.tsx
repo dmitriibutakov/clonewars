@@ -1,8 +1,8 @@
+import React from "react"
 
-export default function Home() {
-  return (
-    <main>
-      <h1>hello next.js</h1>
-    </main>
-  )
+type indexProps = {}
+
+const index: React.FC<indexProps> = () => {
+  return <div>mainpage</div>
 }
+export default index
