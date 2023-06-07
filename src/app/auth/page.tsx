@@ -1,9 +1,13 @@
+"use client"
+import { authModalState } from "@/atoms/authModalAtom"
 import AuthModal from "@/components/Modals/AuthModal"
 import Navbar from "@/components/Navbar"
 import React from "react"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 type AuthPageProps = {}
 
 const AuthPage: React.FC<AuthPageProps> = () => {
+  const authModal = useRecoilValue(authModalState)
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-600 to-black">
       <div className="mx-auto max-w-7xl">
@@ -24,7 +28,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
             </span>{" "}
           </h1>
         </div>
-        <AuthModal />
+        {authModal.isOpen && <AuthModal />}
       </div>
     </div>
   )

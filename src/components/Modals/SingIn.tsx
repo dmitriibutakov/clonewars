@@ -21,7 +21,7 @@ const SignIn: React.FC<SignInProps> = () => {
       ].map(
         (
           el: { id: string; placeholder: string; text: string },
-          key: number
+          key: number,
         ) => (
           <Input
             key={key}
@@ -29,7 +29,7 @@ const SignIn: React.FC<SignInProps> = () => {
             placeholder={el.placeholder}
             text={el.text}
           />
-        )
+        ),
       )}
       <button
         type="submit"

@@ -1,4 +1,12 @@
+import RecoilRootWrapper from "@/wrappers/RecoilRootWrapper"
 import "./globals.css"
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil"
 
 export const metadata = {
   title: "Cleet Code",
@@ -12,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <RecoilRootWrapper>{children}</RecoilRootWrapper>
+      </body>
     </html>
   )
 }

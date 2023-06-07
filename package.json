@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prettier": "npx prettier --write .",
     "prepare": "husky install",
-    "pre-commit": "next lint"
+    "pre-commit": "next lint --fix && git add -A ."
   },
   "dependencies": {
     "@types/node": "20.2.5",
