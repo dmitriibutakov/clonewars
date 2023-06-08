@@ -1,19 +1,14 @@
 import React from "react"
 import Input from "../Input"
-import {
-  AuthInputKey,
-  AuthModalInput, InputAuthCallback,
-} from "./AuthModalTypes"
+import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
 type ResetPasswordProps = {
   inputs: AuthModalInput[]
   inputCallback: InputAuthCallback
-  name: AuthInputKey
 }
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({
   inputs,
   inputCallback,
-  name
 }) => {
   return (
     <form className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
@@ -30,9 +25,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
             placeholder={el.placeholder}
             text={el.text}
             value={el.value}
-            inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
-              inputCallback(e, name)
-            }
+            inputCallback={inputCallback}
           />
         ))}
       </div>

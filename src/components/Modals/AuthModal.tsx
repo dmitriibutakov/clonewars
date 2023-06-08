@@ -69,9 +69,15 @@ const AuthModal: React.FC<AuthModalProps> = () => {
   ) => {
     setInputs((prev) => ({
       ...prev,
-      key: { ...prev[key], [e.currentTarget.name]: e.currentTarget.value },
+      [key]: prev[key].map((input) => {
+        if (input.id === e.target.name) {
+          return { ...input, value: e.target.value }
+        }
+        return input
+      }),
     }))
   }
+
   return (
     <>
       <div
@@ -94,18 +100,20 @@ const AuthModal: React.FC<AuthModalProps> = () => {
               (value: string, index: number) =>
                 (value === "forgot" && authModal.type === "forgot" && (
                   <ResetPassword
-                    inputCallback={inputHandler}
                     key={index}
-                    name={value}
+                    inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      inputHandler(e, value)
+                    }
                     inputs={inputs[value]}
                   />
                 )) ||
                 (value === "signin" && authModal.type === "signin" && (
                   <SignIn
                     key={index}
-                    name={value}
                     inputs={inputs[value]}
-                    inputCallback={inputHandler}
+                    inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      inputHandler(e, value)
+                    }
                     clickCallbackForgot={clickCallbackForgot}
                     clickCallbackSignUp={clickCallbackSignUp}
                   />
@@ -113,9 +121,10 @@ const AuthModal: React.FC<AuthModalProps> = () => {
                 (value === "signup" && authModal.type === "signup" && (
                   <SignUp
                     key={index}
-                    name={value}
                     inputs={inputs[value]}
-                    inputCallback={inputHandler}
+                    inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      inputHandler(e, value)
+                    }
                     clickCallbackSignUp={clickCallbackSignUp}
                     clickCallbackSignIn={clickCallbackSignIn}
                   />

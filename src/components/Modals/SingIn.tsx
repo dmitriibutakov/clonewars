@@ -1,29 +1,24 @@
 import Input from "@/components/Input"
 import React from "react"
-import {
-  AuthInputKey,
-  AuthModalInput,
-  InputAuthCallback,
-} from "./AuthModalTypes"
+import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
+import Button from "../Button"
 
 type SignInProps = {
   clickCallbackForgot: () => void
   clickCallbackSignUp: () => void
   inputs: AuthModalInput[]
   inputCallback: InputAuthCallback
-  name: AuthInputKey
 }
 
 const SignIn: React.FC<SignInProps> = ({
   clickCallbackForgot,
   clickCallbackSignUp,
   inputs,
-  name,
   inputCallback,
 }) => {
   return (
     <form className="space-y-6 px-6 pb-4">
-      <h3 className="text-xl font-medium text-white">Sigh In to CleetCode</h3>
+      <h3 className="text-xl font-medium text-white">Sign In to CleetCode</h3>
       {inputs.map((el: AuthModalInput, key: number) => (
         <Input
           value={el.value}
@@ -31,17 +26,10 @@ const SignIn: React.FC<SignInProps> = ({
           id={el.id}
           placeholder={el.placeholder}
           text={el.text}
-          inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
-            inputCallback(e, name)
-          }
+          inputCallback={inputCallback}
         />
       ))}
-      <button
-        type="submit"
-        className="w-full rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white hover:bg-brand-orange-s focus:ring-blue-300"
-      >
-        sign in
-      </button>
+      <Button loading={true} name={"sign in"} />
       <button
         onClick={clickCallbackForgot}
         type="submit"

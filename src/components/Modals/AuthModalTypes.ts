@@ -1,7 +1,6 @@
 export type AuthInputKey = "signup" | "signin" | "forgot"
 export type InputAuthCallback = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  key: AuthInputKey,
+  e: React.ChangeEvent<HTMLInputElement>
 ) => void
 export type AuthModalInputs = {[key in AuthInputKey]: AuthModalInput[]}
 export type AuthModalInput = {
