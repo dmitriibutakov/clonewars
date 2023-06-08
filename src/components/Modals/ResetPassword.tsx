@@ -1,8 +1,20 @@
 import React from "react"
 import Input from "../Input"
-type ResetPasswordProps = {}
+import {
+  AuthInputKey,
+  AuthModalInput, InputAuthCallback,
+} from "./AuthModalTypes"
+type ResetPasswordProps = {
+  inputs: AuthModalInput[]
+  inputCallback: InputAuthCallback
+  name: AuthInputKey
+}
 
-const ResetPassword: React.FC<ResetPasswordProps> = () => {
+const ResetPassword: React.FC<ResetPasswordProps> = ({
+  inputs,
+  inputCallback,
+  name
+}) => {
   return (
     <form className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
       <h3 className="text-xl font-medium  text-white">Reset Password</h3>
@@ -11,11 +23,18 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
         send you an e-mail allowing you to reset it.
       </p>
       <div>
-        <Input
-          id="email"
-          placeholder="Enter your email:"
-          text="example@mail.com"
-        />
+        {inputs.map((el: AuthModalInput, idx: number) => (
+          <Input
+            key={idx}
+            id={el.id}
+            placeholder={el.placeholder}
+            text={el.text}
+            value={el.value}
+            inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
+              inputCallback(e, name)
+            }
+          />
+        ))}
       </div>
 
       <button

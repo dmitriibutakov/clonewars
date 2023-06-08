@@ -4,9 +4,16 @@ type InputProps = {
   id: string
   placeholder: string
   text: string
+  value: string
+  inputCallback: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input: React.FC<InputProps> = ({ id, placeholder, text }) => {
+const Input: React.FC<InputProps> = ({
+  id,
+  placeholder,
+  text,
+  inputCallback,
+}) => {
   return (
     <>
       <label
@@ -17,6 +24,7 @@ const Input: React.FC<InputProps> = ({ id, placeholder, text }) => {
       </label>
       <input
         type={id}
+        onChange={inputCallback}
         name={id}
         id={id}
         className="block w-full rounded-lg border-2 border-gray-500 bg-gray-600 p-2.5 text-white placeholder-gray-400
