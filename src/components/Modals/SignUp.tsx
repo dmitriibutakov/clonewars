@@ -1,9 +1,15 @@
 import Input from "@/components/Input"
 import React from "react"
 
-type SignUpProps = {}
+type SignUpProps = {
+  clickCallbackSignIn: () => void
+  clickCallbackSignUp: () => void
+}
 
-const SignUp: React.FC<SignUpProps> = () => {
+const SignUp: React.FC<SignUpProps> = ({
+  clickCallbackSignIn,
+  clickCallbackSignUp,
+}) => {
   return (
     <form className="space-y-6 px-6 pb-4">
       <h3 className="text-xl font-medium text-white">Sigh Up to CleetCode</h3>
@@ -43,18 +49,21 @@ const SignUp: React.FC<SignUpProps> = () => {
         sign up
       </button>
       <button type="submit" className="flex w-full justify-end">
-        <a
-          href="#"
+        <button
+          onClick={clickCallbackSignUp}
           className="block w-full text-right text-sm capitalize text-brand-orange hover:underline"
         >
           register
-        </a>
+        </button>
       </button>
       <div className="text-sm font-medium capitalize text-gray-500">
         already have an account?
-        <a href="#" className="ml-4 capitalize text-blue-700 hover:underline">
+        <button
+          onClick={clickCallbackSignIn}
+          className="ml-4 capitalize text-blue-700 hover:underline"
+        >
           sign in
-        </a>
+        </button>
       </div>
     </form>
   )
