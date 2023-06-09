@@ -1,5 +1,5 @@
 import React from "react"
-import Input from "../Input"
+import Input from "../Input/Input"
 import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
 type ResetPasswordProps = {
   inputs: AuthModalInput[]

@@ -1,7 +1,10 @@
-import Input from "@/components/Input"
-import React from "react"
+import Input from "@/components/Input/Input"
+import React, { useEffect } from "react"
 import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
-import Button from "../Button"
+import Button from "../Button/Button"
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
+import { auth } from "@/firebase/firebase"
+import { useRouter } from "next/navigation"
 
 type SignInProps = {
   clickCallbackForgot: () => void
@@ -16,8 +19,32 @@ const SignIn: React.FC<SignInProps> = ({
   inputs,
   inputCallback,
 }) => {
+  const router = useRouter()
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth)
+  const email = inputs.find((el) => el.id === "email")
+  const password = inputs.find((el) => el.id === "password")
+  const signInHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      if (email && email.value && password && password.value) {
+        const isAuth = await signInWithEmailAndPassword(
+          email.value,
+          password.value,
+        )
+        isAuth && router.push("/")
+      } else {
+        alert("please, fill-in all fields")
+      }
+    } catch (error: any) {
+      alert(error.message)
+    }
+  }
+  useEffect(() => {
+    error && alert(error.message)
+  }, [error])
   return (
-    <form className="space-y-6 px-6 pb-4">
+    <form onSubmit={signInHandler} className="space-y-6 px-6 pb-4">
       <h3 className="text-xl font-medium text-white">Sign In to CleetCode</h3>
       {inputs.map((el: AuthModalInput, key: number) => (
         <Input
@@ -29,7 +56,7 @@ const SignIn: React.FC<SignInProps> = ({
           inputCallback={inputCallback}
         />
       ))}
-      <Button loading={true} name={"sign in"} />
+      <Button loading={loading} name={"sign in"} />
       <button
         onClick={clickCallbackForgot}
         type="submit"

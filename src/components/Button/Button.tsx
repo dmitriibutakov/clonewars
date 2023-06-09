@@ -1,19 +1,23 @@
 import React from "react"
 
 type ButtonProps = {
-  loading: boolean
+  loading?: boolean
   name: string
+  dark?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({ name, loading }) => {
+const Button: React.FC<ButtonProps> = ({ name, loading, dark }) => {
+  const setStyleBtnLoading = !dark
+    ? "inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white transition duration-150 ease-in-out"
+    : "inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg cursor-pointer bg-dark-fill-3 px-5 py-2.5 text-center text-sm font-medium capitalize transition duration-150 ease-in-out"
+  const setStyleBtn = !dark
+    ? "w-full rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white hover:bg-brand-orange-s focus:ring-blue-300"
+    : "cursor-pointer rounded bg-dark-fill-3 px-2 py-1 capitalize"
   return (
     <>
       {loading ? (
         <div className="flex items-center justify-center">
-          <button
-            type="button"
-            className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white transition duration-150 ease-in-out"
-          >
+          <button type="button" className={setStyleBtnLoading}>
             <svg
               className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,10 +42,7 @@ const Button: React.FC<ButtonProps> = ({ name, loading }) => {
           </button>
         </div>
       ) : (
-        <button
-          type="submit"
-          className="w-full rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white hover:bg-brand-orange-s focus:ring-blue-300"
-        >
+        <button type="submit" className={setStyleBtn}>
           {name}
         </button>
       )}

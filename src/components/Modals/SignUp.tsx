@@ -1,10 +1,9 @@
-// "use client"
-import Input from "@/components/Input"
+import Input from "@/components/Input/Input"
 import React, { useEffect } from "react"
 import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
 import { auth } from "@/firebase/firebase"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
-import Button from "../Button"
+import Button from "../Button/Button"
 import { useRouter } from "next/navigation"
 
 type SignUpProps = {
