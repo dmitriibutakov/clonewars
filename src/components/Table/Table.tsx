@@ -1,6 +1,7 @@
 import { tasks } from "@/mockTasks/tasks"
 import React from "react"
 import { BsCheckCircle } from "react-icons/bs"
+import { AiFillGithub } from "react-icons/ai"
 
 type ProblemsTableProps = {}
 
@@ -39,7 +40,19 @@ const Table: React.FC<ProblemsTableProps> = ({}) => {
               </td>
               <td className={"px-1 py-2"}>{task.category}</td>
               <td className={"px-1 py-2"}>
-                {<p className="text-gray-400">Coming soon</p>}
+                {task.link ? (
+                  <a
+                    target="_blank"
+                    href={
+                      "https://github.com/dmitrybutakov/codewars/blob/main/" +
+                      task.link
+                    }
+                  >
+                    <AiFillGithub />
+                  </a>
+                ) : (
+                  <p className="text-gray-400">Coming soon</p>
+                )}
               </td>
             </tr>
           )

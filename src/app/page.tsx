@@ -1,6 +1,6 @@
 import Table from "@/components/Table/Table"
 import Topbar from "@/components/Topbar/Topbar"
-import React, { useEffect } from "react"
+import React from "react"
 
 type indexProps = {}
 

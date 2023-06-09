@@ -5,18 +5,20 @@ import { auth } from "@/firebase/firebase"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
 import Button from "../Button/Button"
 import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 
 type SignUpProps = {
   clickCallbackSignIn: () => void
   clickCallbackSignUp: () => void
   inputs: AuthModalInput[]
-
+  closeModalCallback: () => void
   inputCallback: InputAuthCallback
 }
 
 const SignUp: React.FC<SignUpProps> = ({
   clickCallbackSignIn,
   inputs,
+  closeModalCallback,
   inputCallback,
 }) => {
   const router = useRouter()
@@ -36,22 +38,30 @@ const SignUp: React.FC<SignUpProps> = ({
         name &&
         name.value
       ) {
-        const newUser = await createUserWithEmailAndPassword(
+        const response = await createUserWithEmailAndPassword(
           email.value,
           password.value,
         )
-        if (!newUser) {
+        if (response) {
+          closeModalCallback()
+          router.push("/")
         }
-        router.push("/")
       } else {
-        alert("please, fill-in all fields")
+        toast.error("Please, fill-in all fields", {
+          position: "bottom-right"
+        })
       }
     } catch (error: any) {
-      alert(error.message)
+      toast.error(error.message, {
+        position: "bottom-right"
+      })
     }
   }
   useEffect(() => {
-    error && alert(error.message)
+    error &&
+      toast.error(error.message, {
+        position: "top-center"
+      })
   }, [error])
   return (
     <form onSubmit={signUpHandler} className="space-y-6 px-6 pb-4">

@@ -12,6 +12,8 @@ type AuthModalProps = {}
 const AuthModal: React.FC<AuthModalProps> = () => {
   const authModal = useRecoilValue(authModalState)
   const changeAuthState = useSetRecoilState(authModalState)
+  const closeModal = () =>
+    changeAuthState((prev) => ({ ...prev, isOpen: false, type: "signin" }))
   const clickCallbackSignUp = () =>
     changeAuthState((prev) => ({ ...prev, type: "signup" }))
   const clickCallbackForgot = () =>
@@ -104,6 +106,7 @@ const AuthModal: React.FC<AuthModalProps> = () => {
                     inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
                       inputHandler(e, value)
                     }
+                    closeModalCallback={closeModal}
                     inputs={inputs[value]}
                   />
                 )) ||
@@ -114,6 +117,7 @@ const AuthModal: React.FC<AuthModalProps> = () => {
                     inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
                       inputHandler(e, value)
                     }
+                    closeModalCallback={closeModal}
                     clickCallbackForgot={clickCallbackForgot}
                     clickCallbackSignUp={clickCallbackSignUp}
                   />
@@ -125,6 +129,7 @@ const AuthModal: React.FC<AuthModalProps> = () => {
                     inputCallback={(e: React.ChangeEvent<HTMLInputElement>) =>
                       inputHandler(e, value)
                     }
+                    closeModalCallback={closeModal}
                     clickCallbackSignUp={clickCallbackSignUp}
                     clickCallbackSignIn={clickCallbackSignIn}
                   />
@@ -149,6 +154,7 @@ function useCloseModal() {
     }
     window.addEventListener("keydown", escHandler)
     return () => window.removeEventListener("keydown", escHandler)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return closeModal
 }

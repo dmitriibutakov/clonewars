@@ -1,17 +1,54 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Input from "../Input/Input"
 import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
+import { auth } from "@/firebase/firebase"
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth"
+import { toast } from "react-toastify"
+import Button from "../Button/Button"
 type ResetPasswordProps = {
   inputs: AuthModalInput[]
   inputCallback: InputAuthCallback
+  closeModalCallback: () => void
 }
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({
   inputs,
   inputCallback,
+  closeModalCallback,
 }) => {
+  const email = inputs.find((el) => el.id === "email")
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth)
+  const resetPasswordHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      if (email) {
+        const response = await sendPasswordResetEmail(email.value)
+        if (response) {
+          closeModalCallback()
+          toast.success("Your password was sucessfully reset", {
+            position: "bottom-right",
+          })
+        }
+      }
+    } catch (error: any) {
+      toast.error(error.message, {
+        position: "bottom-right",
+      })
+    }
+  }
+  useEffect(() => {
+    error &&
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 3000,
+      })
+  }, [error])
   return (
-    <form className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
+    <form
+      onSubmit={resetPasswordHandler}
+      className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8"
+    >
       <h3 className="text-xl font-medium  text-white">Reset Password</h3>
       <p className="text-sm text-white">
         Forgotten your password? Enter your e-mail address below, and we&apos;ll
@@ -30,13 +67,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
         ))}
       </div>
 
-      <button
-        type="submit"
-        className=" w-full rounded-lg bg-brand-orange  px-5 py-2.5 text-center text-sm font-medium capitalize text-white hover:bg-brand-orange-s 
-                focus:ring-4 focus:ring-blue-300 "
-      >
-        reset password
-      </button>
+      <Button name="reset password" />
     </form>
   )
 }

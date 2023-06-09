@@ -5,17 +5,20 @@ import Button from "../Button/Button"
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
 import { auth } from "@/firebase/firebase"
 import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 
 type SignInProps = {
   clickCallbackForgot: () => void
   clickCallbackSignUp: () => void
   inputs: AuthModalInput[]
   inputCallback: InputAuthCallback
+  closeModalCallback: () => void
 }
 
 const SignIn: React.FC<SignInProps> = ({
   clickCallbackForgot,
   clickCallbackSignUp,
+  closeModalCallback,
   inputs,
   inputCallback,
 }) => {
@@ -28,20 +31,30 @@ const SignIn: React.FC<SignInProps> = ({
     e.preventDefault()
     try {
       if (email && email.value && password && password.value) {
-        const isAuth = await signInWithEmailAndPassword(
+        const response = await signInWithEmailAndPassword(
           email.value,
           password.value,
         )
-        isAuth && router.push("/")
+        if (response) {
+          closeModalCallback()
+          router.push("/")
+        }
       } else {
-        alert("please, fill-in all fields")
+        toast.info("Please, fill-in all fields", {
+          position: "bottom-right",
+        })
       }
     } catch (error: any) {
-      alert(error.message)
+      toast.error(error.message, {
+        position: "bottom-right",
+      })
     }
   }
   useEffect(() => {
-    error && alert(error.message)
+    error &&
+      toast.error(error.message, {
+        position: "bottom-right",
+      })
   }, [error])
   return (
     <form onSubmit={signInHandler} className="space-y-6 px-6 pb-4">

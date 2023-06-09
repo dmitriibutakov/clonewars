@@ -1,91 +1,91 @@
 export type Task = {
-	id: string;
-	title: string;
-	difficulty: string;
-	category: string;
-	order: number;
-	link?: string;
-};
+  id: string
+  title: string
+  difficulty: string
+  category: string
+  order: number
+  link?: string
+}
 
 export const tasks: Task[] = [
-	{
-		id: "two-sum",
-		title: "Two Sum",
-		difficulty: "Easy",
-		category: "Array",
-		order: 1,
-		link: "8-k1C6ehKuw",
-	},
-	{
-		id: "reverse-linked-list",
-		title: "Reverse Linked List",
-		difficulty: "Hard",
-		category: "Linked List",
-		order: 2,
-		link: "",
-	},
-	{
-		id: "jump-game",
-		title: "Jump Game",
-		difficulty: "Medium",
-		category: "Dynamic Programming",
-		order: 3,
-		link: "",
-	},
-	{
-		id: "valid-parentheses",
-		title: "Valid Parentheses",
-		difficulty: "Easy",
-		category: "Stack",
-		order: 4,
-		link: "xty7fr-k0TU",
-	},
-	{
-		id: "search-a-2d-matrix",
-		title: "Search a 2D Matrix",
-		difficulty: "Medium",
-		category: "Binary Search",
-		order: 5,
-		link: "ZfFl4torNg4",
-	},
-	{
-		id: "container-with-most-water",
-		title: "Container With Most Water",
-		difficulty: "Medium",
-		category: "Two Pointers",
-		order: 6,
-		link: "",
-	},
-	{
-		id: "merge-intervals",
-		title: "Merge Intervals",
-		difficulty: "Medium",
-		category: "intervals",
-		order: 7,
-		link: "",
-	},
-	{
-		id: "maximum-depth-of-binary-tree",
-		title: "Maximum Depth of Binary Tree",
-		difficulty: "Easy",
-		category: "Tree",
-		order: 8,
-		link: "4qYTqOiRMoM",
-	},
-	{
-		id: "best-time-to-buy-and-sell-stock",
-		title: "Best Time to Buy and Sell Stock",
-		difficulty: "Easy",
-		category: "Array",
-		order: 9,
-		link: "",
-	},
-	{
-		id: "subsets",
-		title: "Subsets",
-		difficulty: "Medium",
-		category: "Backtracking",
-		order: 10,
-		link: "",
-	},
-];
+  {
+    id: "6-kyu-Consecutive-strings",
+    title: "Consecutive strings",
+    difficulty: "Medium",
+    category: "Array",
+    order: 1,
+    link: "6-kyu-Consecutive-strings/index.js",
+  },
+  {
+    id: "6-kyu-Highest-Scoring-Word",
+    title: "Highest scoring word",
+    difficulty: "Easy",
+    category: "Linked List",
+    order: 2,
+    link: "6-kyu-Highest-Scoring-Word/index.js",
+  },
+  {
+    id: "6-kyu-Playing-with-digits",
+    title: "Playing with digits",
+    difficulty: "Medium",
+    category: "Dynamic Programming",
+    order: 3,
+    link: "6-kyu-Playing-with-digits/index.js",
+  },
+  {
+    id: "6-kyu-Your-order-please",
+    title: "Your order please",
+    difficulty: "Medium",
+    category: "Stack",
+    order: 4,
+    link: "6-kyu-Your-order-please/index.js",
+  },
+  {
+    id: "7-kyu-Beginner-Series-of-Numbers",
+    title: "Beginner series of numbers",
+    difficulty: "Easy",
+    category: "Binary Search",
+    order: 5,
+    link: "7-kyu-Beginner-Series-%233-of-Numbers/index.js",
+  },
+  {
+    id: "container-with-most-water",
+    title: "Container with most water",
+    difficulty: "Medium",
+    category: "Two Pointers",
+    order: 6,
+    link: "",
+  },
+  {
+    id: "merge-intervals",
+    title: "Merge intervals",
+    difficulty: "Medium",
+    category: "intervals",
+    order: 7,
+    link: "",
+  },
+  {
+    id: "7-kyu-Categorize-New-Member",
+    title: "Categorize new member",
+    difficulty: "Easy",
+    category: "Tree",
+    order: 8,
+    link: "7-kyu-Categorize-New-Member/index.js",
+  },
+  {
+    id: "7-kyu-Descending-Order",
+    title: "Descending order",
+    difficulty: "Easy",
+    category: "Array",
+    order: 9,
+    link: "7-kyu-Descending-Order/index.js",
+  },
+  {
+    id: "7-kyu-Find-the-next-perfect-square",
+    title: "Find the next perfect square",
+    difficulty: "Easy",
+    category: "Backtracking",
+    order: 10,
+    link: "7-kyu-Find-the-next-perfect-square/index.js",
+  }
+]

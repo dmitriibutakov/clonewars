@@ -1,18 +1,24 @@
 import React from "react"
-
+import { FiLogOut } from "react-icons/fi"
 type ButtonProps = {
   loading?: boolean
   name: string
   dark?: boolean
+  clickCallback?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({ name, loading, dark }) => {
+const Button: React.FC<ButtonProps> = ({
+  name,
+  loading,
+  dark,
+  clickCallback,
+}) => {
   const setStyleBtnLoading = !dark
     ? "inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white transition duration-150 ease-in-out"
     : "inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg cursor-pointer bg-dark-fill-3 px-5 py-2.5 text-center text-sm font-medium capitalize transition duration-150 ease-in-out"
   const setStyleBtn = !dark
     ? "w-full rounded-lg bg-brand-orange px-5 py-2.5 text-center text-sm font-medium capitalize text-white hover:bg-brand-orange-s focus:ring-blue-300"
-    : "cursor-pointer rounded bg-dark-fill-3 px-2 py-1 capitalize"
+    : "cursor-pointer hover:text-brand-orange rounded bg-dark-fill-3 px-2 py-1 capitalize"
   return (
     <>
       {loading ? (
@@ -42,8 +48,8 @@ const Button: React.FC<ButtonProps> = ({ name, loading, dark }) => {
           </button>
         </div>
       ) : (
-        <button type="submit" className={setStyleBtn}>
-          {name}
+        <button onClick={clickCallback} type="submit" className={setStyleBtn}>
+          {name === "logout" ? <FiLogOut /> : name}
         </button>
       )}
     </>
