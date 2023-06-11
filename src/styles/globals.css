@@ -49,16 +49,13 @@ body {
 }
 
 .split {
-  display: flex;
-  flex-direction: row;
-}
-.split {
    display: flex;
    flex-direction: row;
 }
 
 .gutter {
-   background-color: #eee;
+   background-color: #1a1a1a;
+   border: 0;
    background-repeat: no-repeat;
    background-position: 50%;
 }
