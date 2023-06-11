@@ -1,10 +1,8 @@
-import Table from "@/components/Table/Table"
+import ProblemsTable from "@/components/ProblemsTable/ProblemsTable"
 import Topbar from "@/components/Topbar/Topbar"
 import React from "react"
 
-type indexProps = {}
-
-const index: React.FC<indexProps> = () => {
+export default function Home() {
   return (
     <main className="min-h-screen bg-dark-layer-2">
       <Topbar />
@@ -13,9 +11,8 @@ const index: React.FC<indexProps> = () => {
       </h1>
 
       <div className="relative mx-auto overflow-x-auto px-6 pb-10">
-        <Table />
+        <ProblemsTable />
       </div>
     </main>
   )
 }
-export default index

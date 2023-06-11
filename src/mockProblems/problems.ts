@@ -1,4 +1,4 @@
-export type Task = {
+export type Problem = {
   id: string
   title: string
   difficulty: string
@@ -7,9 +7,9 @@ export type Task = {
   link?: string
 }
 
-export const tasks: Task[] = [
+export const problems: Problem[] = [
   {
-    id: "6-kyu-Consecutive-strings",
+    id: "Consecutive-strings",
     title: "Consecutive strings",
     difficulty: "Medium",
     category: "Array",
@@ -17,7 +17,7 @@ export const tasks: Task[] = [
     link: "6-kyu-Consecutive-strings/index.js",
   },
   {
-    id: "6-kyu-Highest-Scoring-Word",
+    id: "Highest-Scoring-Word",
     title: "Highest scoring word",
     difficulty: "Easy",
     category: "Linked List",
@@ -25,7 +25,7 @@ export const tasks: Task[] = [
     link: "6-kyu-Highest-Scoring-Word/index.js",
   },
   {
-    id: "6-kyu-Playing-with-digits",
+    id: "Playing-with-digits",
     title: "Playing with digits",
     difficulty: "Medium",
     category: "Dynamic Programming",
@@ -33,7 +33,7 @@ export const tasks: Task[] = [
     link: "6-kyu-Playing-with-digits/index.js",
   },
   {
-    id: "6-kyu-Your-order-please",
+    id: "Your-order-please",
     title: "Your order please",
     difficulty: "Medium",
     category: "Stack",
@@ -41,7 +41,7 @@ export const tasks: Task[] = [
     link: "6-kyu-Your-order-please/index.js",
   },
   {
-    id: "7-kyu-Beginner-Series-of-Numbers",
+    id: "Beginner-Series-of-Numbers",
     title: "Beginner series of numbers",
     difficulty: "Easy",
     category: "Binary Search",
@@ -49,7 +49,7 @@ export const tasks: Task[] = [
     link: "7-kyu-Beginner-Series-%233-of-Numbers/index.js",
   },
   {
-    id: "container-with-most-water",
+    id: "Container-with-most-water",
     title: "Container with most water",
     difficulty: "Medium",
     category: "Two Pointers",
@@ -57,7 +57,7 @@ export const tasks: Task[] = [
     link: "",
   },
   {
-    id: "merge-intervals",
+    id: "Merge-intervals",
     title: "Merge intervals",
     difficulty: "Medium",
     category: "intervals",
@@ -65,7 +65,7 @@ export const tasks: Task[] = [
     link: "",
   },
   {
-    id: "7-kyu-Categorize-New-Member",
+    id: "Categorize-new-member",
     title: "Categorize new member",
     difficulty: "Easy",
     category: "Tree",
@@ -73,7 +73,7 @@ export const tasks: Task[] = [
     link: "7-kyu-Categorize-New-Member/index.js",
   },
   {
-    id: "7-kyu-Descending-Order",
+    id: "Descending-order",
     title: "Descending order",
     difficulty: "Easy",
     category: "Array",
@@ -81,11 +81,11 @@ export const tasks: Task[] = [
     link: "7-kyu-Descending-Order/index.js",
   },
   {
-    id: "7-kyu-Find-the-next-perfect-square",
+    id: "Find-the-next-perfect-square",
     title: "Find the next perfect square",
     difficulty: "Easy",
     category: "Backtracking",
     order: 10,
     link: "7-kyu-Find-the-next-perfect-square/index.js",
-  }
+  },
 ]

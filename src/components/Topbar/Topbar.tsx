@@ -8,18 +8,18 @@ import { auth } from "@/firebase/firebase"
 import Image from "next/image"
 import { useSetRecoilState } from "recoil"
 import { authModalState } from "@/atoms/authModalAtom"
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import { BsList } from "react-icons/bs"
+import Timer from "../Timer/Timer"
 
-type TopbarProps = {}
+type TopbarProps = {
+  problemsPage?: boolean
+}
 
-const Topbar: React.FC<TopbarProps> = () => {
+const Topbar: React.FC<TopbarProps> = ({ problemsPage }) => {
   const [user] = useAuthState(auth)
   const [signOut, loading, error] = useSignOut(auth)
   const setAuthState = useSetRecoilState(authModalState)
-  const openAuthModal = setAuthState((prev) => ({
-    ...prev,
-    isOpen: true,
-    type: "signin",
-  }))
   return (
     <nav className="md:24-px relative flex items-center justify-between bg-dark-layer-1 px-2 text-dark-gray-7 sm:px-12">
       <div
@@ -27,12 +27,39 @@ const Topbar: React.FC<TopbarProps> = () => {
       >
         <Logo />
         <div className="flex flex-1 items-center justify-end space-x-4">
+          {problemsPage && (
+            <div className="flex flex-1 items-center justify-center gap-4">
+              <div className="dark-fill-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded hover:bg-dark-fill-2">
+                <FaChevronLeft />
+              </div>
+              <Link
+                className="max-w[170px] flex cursor-pointer items-center justify-center gap-2 font-medium capitalize text-dark-gray-8"
+                href="/"
+              >
+                <BsList /> problems list
+              </Link>
+              <div className="dark-fill-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded hover:bg-dark-fill-2">
+                <FaChevronRight />
+              </div>
+            </div>
+          )}
+        </div>
+        <Timer/>
           {!user ? (
-            <Link href="/auth" onClick={() => openAuthModal}>
+            <Link
+              href="/auth"
+              onClick={() =>
+                setAuthState((prev) => ({
+                  ...prev,
+                  isOpen: true,
+                  type: "signin",
+                }))
+              }
+            >
               <Button name="sign in" dark={true} />
             </Link>
           ) : (
-            <div className="align-center group relative flex cursor-pointer">
+            <div className="group relative flex cursor-pointer justify-center">
               <Image
                 src="/avatar.png"
                 className="mr-4"
@@ -54,7 +81,6 @@ const Topbar: React.FC<TopbarProps> = () => {
               />
             </div>
           )}
-        </div>
       </div>
     </nav>
   )

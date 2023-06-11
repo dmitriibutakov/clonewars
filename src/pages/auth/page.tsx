@@ -20,10 +20,10 @@ const AuthPage: React.FC<AuthPageProps> = () => {
   }, [user, router])
   return (
     <main className="relative h-screen bg-gradient-to-b from-gray-600 to-black">
-      <div className="mx-auto max-w-7xl">
+      <section className="mx-auto max-w-7xl">
         <Navbar />
         <div className="pointer-events-none  flex h-[calc(100vh-5rem)] select-none items-center justify-center">
-          <h1 className="font-display flex-column align-center mx-auto max-w-4xl text-center text-5xl font-bold tracking-normal text-gray-300 sm:text-7xl">
+          <h1 className="font-display flex-column justify-center mx-auto max-w-4xl text-center text-5xl font-bold tracking-normal text-gray-300 sm:text-7xl">
             Your way to{" "}
             <span className="relative whitespace-nowrap text-brand-orange">
               <svg
@@ -39,7 +39,7 @@ const AuthPage: React.FC<AuthPageProps> = () => {
           </h1>
         </div>
         {authModal.isOpen && <AuthModal />}
-      </div>
+      </section>
     </main>
   )
 }
