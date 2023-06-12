@@ -1,1 +1,1 @@
-Leetcode clone based on Next.js, Tailwind CSS and Firebase
+sandbox based on Next.js, Tailwind CSS and Firebase
