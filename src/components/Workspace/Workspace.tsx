@@ -1,7 +1,7 @@
 import React from "react"
 import Split from "react-split"
 import ProblemDescription from "./ProblemsDescription/ProblemsDescription"
-import Playground from "../Playground/Playground"
+import Playground from "./Playground/Playground"
 
 type WorkspaceProps = {}
 
