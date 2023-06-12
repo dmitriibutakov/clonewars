@@ -58,7 +58,7 @@ const SignIn: React.FC<SignInProps> = ({
   }, [error])
   return (
     <form onSubmit={signInHandler} className="space-y-6 px-6 pb-4">
-      <h3 className="text-xl font-medium text-white">Sign In to CleetCode</h3>
+      <h3 className="text-xl font-medium text-white">Sign In to CloneWars</h3>
       {inputs.map((el: AuthModalInput, key: number) => (
         <Input
           value={el.value}
