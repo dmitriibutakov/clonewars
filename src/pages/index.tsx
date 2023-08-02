@@ -10,7 +10,7 @@ export default function Home() {
         test your knowledge in javascript
       </h1>
 
-      <div className="relative mx-auto overflow-x-auto px-6 pb-10">
+      <div className="relative px-6 pb-10 flex min-h-[70vh] items-center justify-center">
         <ProblemsTable />
       </div>
     </main>

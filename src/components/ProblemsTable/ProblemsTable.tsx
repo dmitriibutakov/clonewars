@@ -13,7 +13,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({}) => {
       <thead className="border-b text-xs uppercase text-gray-700 dark:text-gray-400 ">
         <tr>
           {tableHeader.map((name: string, id: number) => (
-            <th key={id} scope="col" className="px-1 py-2 font-medium">
+            <th key={id} scope="col" className="px-2 py-4 font-medium">
               {name}
             </th>
           ))}
@@ -32,10 +32,10 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({}) => {
               className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`}
               key={problem.id}
             >
-              <th className="whitespace-nowrap px-1 py-2 font-medium text-dark-green-s">
+              <th className="whitespace-nowrap px-2 py-4 font-medium text-dark-green-s">
                 <BsCheckCircle fontSize={18} width="18" />
               </th>
-              <td className="px-1 py-2">
+              <td className="px-2 py-4">
                 <Link
                   className="hover:text-blue-600"
                   href={`problems/${problem.id}`}

@@ -11,7 +11,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     changeAuthState((prev) => ({ ...prev, isOpen: true }))
   }
   return (
-    <div className="md:24-px flex items-center justify-between px-2 sm:px-12">
+    <div className="mx-auto flex h-[50px] w-full max-w-[1200px] items-center justify-between">
       <Logo />
       <div className="flex items-center">
         <button

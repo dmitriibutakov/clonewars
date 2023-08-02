@@ -21,9 +21,9 @@ const Topbar: React.FC<TopbarProps> = ({ problemsPage }) => {
   const [signOut, loading, error] = useSignOut(auth)
   const setAuthState = useSetRecoilState(authModalState)
   return (
-    <nav className="md:24-px relative flex items-center justify-between bg-dark-layer-1 px-2 text-dark-gray-7 sm:px-12">
+    <nav className="relative flex h-[50px] items-center justify-between bg-dark-layer-1 px-2 text-dark-gray-7 sm:px-12 md:px-24">
       <div
-        className={`mx-auto flex h-[50] w-full max-w-[1200px] items-center justify-between`}
+        className={`mx-auto flex w-full max-w-[1200px] items-center justify-between`}
       >
         <Logo />
         <div className="flex flex-1 items-center justify-end space-x-4">
@@ -44,43 +44,43 @@ const Topbar: React.FC<TopbarProps> = ({ problemsPage }) => {
             </div>
           )}
         </div>
-        <Timer/>
-          {!user ? (
-            <Link
-              href="/auth"
-              onClick={() =>
-                setAuthState((prev) => ({
-                  ...prev,
-                  isOpen: true,
-                  type: "signin",
-                }))
-              }
-            >
-              <Button name="sign in" dark={true} />
-            </Link>
-          ) : (
-            <div className="group relative flex cursor-pointer justify-center">
-              <Image
-                src="/avatar.png"
-                className="mr-4"
-                alt="avatar"
-                width="32"
-                height="32"
-              />
-              <div
-                className="absolute left-2/4 top-10 z-40  mx-auto -translate-x-2/4 scale-0 rounded bg-dark-layer-1 p-2 text-brand-orange shadow-lg transition-all 
+        <Timer />
+        {!user ? (
+          <Link
+            href="/auth"
+            onClick={() =>
+              setAuthState((prev) => ({
+                ...prev,
+                isOpen: true,
+                type: "signin",
+              }))
+            }
+          >
+            <Button name="sign in" dark={true} />
+          </Link>
+        ) : (
+          <div className="group relative flex cursor-pointer justify-center">
+            <Image
+              src="/avatar.png"
+              className="mr-4"
+              alt="avatar"
+              width="32"
+              height="32"
+            />
+            <div
+              className="absolute left-2/4 top-10 z-40  mx-auto -translate-x-2/4 scale-0 rounded bg-dark-layer-1 p-2 text-brand-orange shadow-lg transition-all 
 		duration-300 ease-in-out group-hover:scale-100"
-              >
-                <p className="text-sm">{user.email}</p>
-              </div>
-              <Button
-                clickCallback={async () => await signOut()}
-                name="logout"
-                loading={loading}
-                dark={true}
-              />
+            >
+              <p className="text-sm">{user.email}</p>
             </div>
-          )}
+            <Button
+              clickCallback={async () => await signOut()}
+              name="logout"
+              loading={loading}
+              dark={true}
+            />
+          </div>
+        )}
       </div>
     </nav>
   )
