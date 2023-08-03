@@ -1,10 +1,12 @@
 export type Problem = {
-	id: string;
-	title: string;
-	difficulty: string;
-	category: string;
-	order: number;
-	videoId?: string;
+	id: string
+	title: string
+	difficulty: string
+	category: string
+	order: number
+	link?: string
+	likes?: number
+	dislikes?: number
 };
 
 export const problems: Problem[] = [
