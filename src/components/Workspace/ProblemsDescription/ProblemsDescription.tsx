@@ -85,22 +85,10 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                         </div>
 
                         {/* Constraints */}
-                        <div className="my-5">
+                        <div>
                             <div className="text-sm font-medium text-white">Constraints:</div>
                             <ul className="ml-5 list-disc text-white">
-                                <li className="mt-2">
-                                    <code>2 ≤ nums.length ≤ 10</code>
-                                </li>
-
-                                <li className="mt-2">
-                                    <code>-10 ≤ nums[i] ≤ 10</code>
-                                </li>
-                                <li className="mt-2">
-                                    <code>-10 ≤ target ≤ 10</code>
-                                </li>
-                                <li className="mt-2 text-sm">
-                                    <strong>Only one valid answer exists.</strong>
-                                </li>
+                                <div dangerouslySetInnerHTML={{__html: problem.constraints}}></div>
                             </ul>
                         </div>
                     </div>

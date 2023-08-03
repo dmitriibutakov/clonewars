@@ -13,7 +13,7 @@ const Workspace: React.FC<WorkspaceProps> = ({problem}) => {
     <div>
       <Split className="split" minSize={0}>
         <ProblemDescription problem={problem} />
-        <Playground />
+        <Playground problem={problem} />
       </Split>
     </div>
   )

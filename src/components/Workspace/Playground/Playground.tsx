@@ -1,17 +1,18 @@
-import React from "react"
+import React, {useState} from "react"
 import PreferenceNav from "./PreferenceNav/PreferenceNav"
 import Split from "react-split"
 import CodeMirror from "@uiw/react-codemirror"
 import { vscodeDark } from "@uiw/codemirror-theme-vscode"
 import { javascript } from "@codemirror/lang-javascript"
 import EditorFooter from "./EditorFooter"
+import {Problem} from "@/utils/types/problem";
 
-type PlaygroundProps = {}
+type PlaygroundProps = {
+  problem: Problem
+}
 
-const Playground: React.FC<PlaygroundProps> = () => {
-  const codebox = `function twoSum(nums, target) {
-    // Write your code here
-  }`
+const Playground: React.FC<PlaygroundProps> = ({problem}) => {
+ const [activeCaseId, setActiveCaseId] = useState<number>(0)
   return (
     <div className="relative flex flex-col overflow-x-hidden bg-dark-layer-1">
       <PreferenceNav />
@@ -23,7 +24,7 @@ const Playground: React.FC<PlaygroundProps> = () => {
       >
         <div className="w-full overflow-auto">
           <CodeMirror
-            value={codebox}
+            value={problem.starterCode}
             theme={vscodeDark}
             extensions={[javascript()]}
             style={{ fontSize: 16 }}
@@ -41,46 +42,27 @@ const Playground: React.FC<PlaygroundProps> = () => {
           </div>
 
           <div className="flex">
-            <div className="mr-2 mt-2 items-start ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div
-                  className={`relative inline-flex cursor-pointer items-center whitespace-nowrap rounded-lg bg-dark-fill-3 px-4 py-1 font-medium text-white transition-all hover:bg-dark-fill-2 focus:outline-none
-                `}
-                >
-                  Case 1
+            {problem.examples.map((example, index) => (
+              <div onClick={() => setActiveCaseId(index)} className="mr-2 mt-2 items-start " key={example.id}>
+                <div className="flex flex-wrap items-center gap-y-4">
+                  <div
+                      className={`relative inline-flex cursor-pointer items-center whitespace-nowrap rounded-lg bg-dark-fill-3 px-4 py-1 font-medium transition-all hover:bg-dark-fill-2 focus:outline-none ${activeCaseId === index ? " text-white" : "text-gray-400"}`}
+                  >
+                    Case {index + 1}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mr-2 mt-2 items-start ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div
-                  className={`relative inline-flex cursor-pointer items-center whitespace-nowrap rounded-lg bg-dark-fill-3 px-4 py-1 font-medium text-white transition-all hover:bg-dark-fill-2 focus:outline-none
-                `}
-                >
-                  Case 2
-                </div>
-              </div>
-            </div>
-            <div className="mr-2 mt-2 items-start ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div
-                  className={`relative inline-flex cursor-pointer items-center whitespace-nowrap rounded-lg bg-dark-fill-3 px-4 py-1 font-medium text-white transition-all hover:bg-dark-fill-2 focus:outline-none
-                `}
-                >
-                  Case 3
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="my-4 font-semibold">
             <p className="mt-4 text-sm font-medium text-white">Input:</p>
             <div className="mt-2 w-full cursor-text rounded-lg border border-transparent bg-dark-fill-3 px-3 py-[10px] text-white">
-              [1, 2, 3, 4]
+              {problem.examples[activeCaseId].inputText}
             </div>
             <p className="mt-4 text-sm font-medium text-white">Output:</p>
             <div className="mt-2 w-full cursor-text rounded-lg border border-transparent bg-dark-fill-3 px-3 py-[10px] text-white">
-              [5]
+              {problem.examples[activeCaseId].outputText}
             </div>
           </div>
         </div>

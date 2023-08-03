@@ -14,7 +14,7 @@ export const problems: Problem[] = [
 		difficulty: "Easy",
 		category: "Array",
 		order: 1,
-		link: "6-kyu-Consecutive-strings/index.js"
+		link: "https://github.com/dmitrybutakov/codewars/blob/main/6-kyu-Consecutive-strings/index.js"
 	},
 	{
 		id: "reverse-linked-list",
