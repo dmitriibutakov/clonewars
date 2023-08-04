@@ -1,14 +1,17 @@
 import {AiFillLike, AiFillDislike} from "react-icons/ai"
 import {BsCheck2Circle} from "react-icons/bs"
 import {TiStarOutline} from "react-icons/ti"
-import {Problem} from "@/utils/types/problem";
-import React from "react";
+import {DBProblem, Problem} from "@/utils/types/problem";
+import React, {useEffect, useState} from "react";
+import {doc, getDoc} from "@firebase/firestore";
+import {firestore} from "@/firebase/firebase";
 
 type ProblemDescriptionProps = {
     problem: Problem
 }
 
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
+    const {problemDiffClass, currProblem, loading} = useGetCurrentProblem(problem.id)
     return (
         <div className="bg-dark-layer-1">
             {/* TAB */}
@@ -31,11 +34,11 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                                 {problem.title}
                             </div>
                         </div>
-                        <div className="mt-3 flex items-center">
+                        {!loading && currProblem && <div className="mt-3 flex items-center">
                             <div
-                                className={`inline-block rounded-[21px] bg-olive bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize text-olive `}
+                                className={`inline-block rounded-[21px] bg-olive bg-opacity-[.15] px-2.5 py-1 text-xs font-medium capitalize ${problemDiffClass}`}
                             >
-                                Easy
+                                {currProblem.difficulty} kyu
                             </div>
                             <div
                                 className="text-green-s ml-4 rounded p-[3px] text-lg text-dark-green-s transition-colors duration-200">
@@ -44,18 +47,19 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                             <div
                                 className="ml-4 flex cursor-pointer items-center space-x-1 rounded p-[3px]  text-lg text-dark-gray-6 transition-colors duration-200 hover:bg-dark-fill-3">
                                 <AiFillLike/>
-                                <span className="text-xs">120</span>
+                                <span className="text-xs">{currProblem.likes}</span>
                             </div>
                             <div
                                 className="text-green-s ml-4 flex cursor-pointer items-center space-x-1 rounded  p-[3px] text-lg text-dark-gray-6 transition-colors duration-200 hover:bg-dark-fill-3">
                                 <AiFillDislike/>
-                                <span className="text-xs">2</span>
+                                <span className="text-xs">{currProblem.dislikes}</span>
                             </div>
                             <div
                                 className="text-green-s ml-4  cursor-pointer rounded  p-[3px] text-xl text-dark-gray-6 transition-colors duration-200 hover:bg-dark-fill-3 ">
                                 <TiStarOutline/>
                             </div>
-                        </div>
+                        </div>}
+
 
                         {/* Problem Statement(paragraphs) */}
                         <div className="text-white" dangerouslySetInnerHTML={
@@ -104,3 +108,27 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
     )
 }
 export default ProblemDescription
+
+function useGetCurrentProblem(problemId: string) {
+    const [currProblem, setCurrProblem] = useState<DBProblem | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [problemDiffClass, setProblemDiffClass] = useState<string>('')
+    useEffect(() => {
+// get problem from db
+        const getCurrentProblem = async () => {
+            setLoading(true)
+            const docRef = doc(firestore, "problems", problemId)
+            const docSnap = await getDoc(docRef)
+            if (docSnap.exists()) {
+                const problem = docSnap.data() as DBProblem
+                setCurrProblem({id: docSnap.id, ...problem} as DBProblem)
+                setProblemDiffClass(
+                    problem.difficulty >= 7 ? "bg-olive ext-olive" : problem.difficulty > 5 ? "bg-dark-yellow text-dark-yellow" : "bg-dark-pink text-dark-pink"
+                )
+            }
+            setLoading(false)
+        }
+       getCurrentProblem()
+    }, [problemId])
+    return {currProblem, loading, problemDiffClass}
+}
