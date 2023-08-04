@@ -66,18 +66,24 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                         <div className="mt-4">
                             {problem.examples.map((example, index) => (
                                 <div key={example.id}>
-                                    <p className="font-medium text-white ">Example {index + 1}: </p>
+                                    <p className="font-medium text-white ">Example {problem.examples.length > 1 && index + 1}: </p>
                                     {example.img && (
                                         <img className="mt-3" src={example.img} alt={example.id.toString()}/>
                                     )}
                                     <div className="example-card">
                   <pre>
-                    <strong className="text-white">Input: </strong> {example.inputText} <br/>
+                      <p className="mb-2">
+                    <strong className="text-white">Input: </strong> {example.inputText}
+                          </p>
+                         <p className="mb-2">
                     <strong>Output:</strong>{example.outputText} <br/>
+                         </p>
+                         <p className="mb-2">
                       {example.explanation &&
                           <>
                               <strong>Explanation:</strong> {example.explanation}
                           </>}
+                         </p>
                   </pre>
                                     </div>
                                 </div>
@@ -85,8 +91,8 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                         </div>
 
                         {/* Constraints */}
-                        <div>
-                            <div className="text-sm font-medium text-white">Constraints:</div>
+                        <div className="pb-4">
+                            <div className=" font-medium text-white">Constraints:</div>
                             <ul className="ml-5 list-disc text-white">
                                 <div dangerouslySetInnerHTML={{__html: problem.constraints}}></div>
                             </ul>

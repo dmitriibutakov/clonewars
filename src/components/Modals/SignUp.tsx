@@ -1,11 +1,12 @@
 import Input from "@/components/Input/Input"
 import React, { useEffect } from "react"
 import { AuthModalInput, InputAuthCallback } from "./AuthModalTypes"
-import { auth } from "@/firebase/firebase"
+import {auth, firestore} from "@/firebase/firebase"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
 import Button from "../Button/Button"
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
+import {doc, setDoc} from "@firebase/firestore";
 
 type SignUpProps = {
   clickCallbackSignIn: () => void
@@ -22,7 +23,7 @@ const SignUp: React.FC<SignUpProps> = ({
   inputCallback,
 }) => {
   const router = useRouter()
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth)
   const email = inputs.find((el) => el.id === "email")
   const password = inputs.find((el) => el.id === "password")
@@ -30,6 +31,7 @@ const SignUp: React.FC<SignUpProps> = ({
   const signUpHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
+      toast.loading("Create your account", {position: "bottom-right", toastId: "loading-toast"})
       if (
         email &&
         email.value &&
@@ -43,6 +45,17 @@ const SignUp: React.FC<SignUpProps> = ({
           password.value,
         )
         if (response) {
+          const userData = {
+            uid: response.user.uid,
+            email: response.user.email,
+            displayName: name,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+            likedProblems: [],
+            solvedProblems: [],
+            starredProblems: []
+          }
+          await setDoc(doc(firestore, "users", response.user.uid), userData)
           closeModalCallback()
           router.push("/")
         }
@@ -55,6 +68,9 @@ const SignUp: React.FC<SignUpProps> = ({
       toast.error(error.message, {
         position: "bottom-right"
       })
+    }
+    finally {
+      toast.dismiss("loading-toast")
     }
   }
   useEffect(() => {

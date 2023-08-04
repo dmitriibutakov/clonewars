@@ -1,13 +1,14 @@
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable"
 import Topbar from "@/components/Topbar/Topbar"
-import React, {useState} from "react"
-import {problems} from "@/mockProblems/problems";
+import React, {useEffect, useState} from "react"
+import {DBProblem} from "@/utils/types/problem";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
+import {firestore} from "@/firebase/firebase";
+import {problems} from "@/utils/problems";
 
 export default function Home() {
     const [loadingProblems, setLoadingProblems] = useState(true)
-    setTimeout(() => {
-        setLoadingProblems(false)
-    }, 1000)
+    const DBproblems = useGetProblems(setLoadingProblems)
     return (
         <main className="min-h-screen bg-dark-layer-2">
             <Topbar/>
@@ -16,12 +17,12 @@ export default function Home() {
             </h1>
 
             <div className="relative px-6 pb-10 flex-col min-h-[70vh] items-center justify-center">
-                {loadingProblems && problems.map((problem, idx) => (
-                    <div key={problem.id} className="animate-pulse">
+                {loadingProblems && Object.keys(problems).map((_, idx) => (
+                    <div key={idx} className="animate-pulse">
                         <LoadingSkeleton/>
                     </div>
                 ))}
-                <ProblemsTable loadingProblems={loadingProblems} setLoadingProblems={setLoadingProblems} />
+                <ProblemsTable loadingProblems={loadingProblems} problems={DBproblems}/>
             </div>
         </main>
     )
@@ -37,4 +38,26 @@ const LoadingSkeleton = () => {
         </div>
     );
 };
+
+function useGetProblems(setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>) {
+    const [problems, setProblems] = useState<DBProblem[]>([]);
+
+    useEffect(() => {
+        const getProblems = async () => {
+            // fetching data logic
+            setLoadingProblems(true);
+            const q = query(collection(firestore, "problems"), orderBy("order", "asc"));
+            const querySnapshot = await getDocs(q);
+            const tmp: DBProblem[] = [];
+            querySnapshot.forEach((doc) => {
+                tmp.push({id: doc.id, ...doc.data()} as DBProblem);
+            });
+            setProblems(tmp);
+            setLoadingProblems(false);
+        };
+
+        getProblems();
+    }, [setLoadingProblems]);
+    return problems;
+}
 

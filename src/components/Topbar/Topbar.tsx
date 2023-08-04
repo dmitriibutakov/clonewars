@@ -44,7 +44,7 @@ const Topbar: React.FC<TopbarProps> = ({ problemsPage }) => {
             </div>
           )}
         </div>
-        <Timer />
+          {user && <Timer/>}
         {!user ? (
           <Link
             href="/auth"
@@ -68,7 +68,7 @@ const Topbar: React.FC<TopbarProps> = ({ problemsPage }) => {
               height="32"
             />
             <div
-              className="absolute left-2/4 top-10 z-40  mx-auto -translate-x-2/4 scale-0 rounded bg-dark-layer-1 p-2 text-brand-orange shadow-lg transition-all 
+              className="absolute left-2/4 top-10 z-40  mx-auto -translate-x-2/4 scale-0 rounded bg-dark-layer-1 p-2 text-brand-orange shadow-lg transition-all
 		duration-300 ease-in-out group-hover:scale-100"
             >
               <p className="text-sm">{user.email}</p>

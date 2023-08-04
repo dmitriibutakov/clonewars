@@ -22,8 +22,7 @@ export type Problem = {
 export type DBProblem = {
 	id: string;
 	title: string;
-	category: string;
-	difficulty: string;
+	difficulty: number;
 	likes: number;
 	dislikes: number;
 	order: number;

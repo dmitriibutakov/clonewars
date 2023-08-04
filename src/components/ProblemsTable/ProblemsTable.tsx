@@ -7,13 +7,12 @@ import {firestore} from "@/firebase/firebase";
 import {DBProblem} from "@/utils/types/problem";
 
 type ProblemsTableProps = {
-    setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>
     loadingProblems: Boolean
+    problems: DBProblem[]
 }
 
-const ProblemsTable: React.FC<ProblemsTableProps> = ({setLoadingProblems, loadingProblems}) => {
-    const tableHeader = ["Status", "Title", "Difficulty", "Category", "Solution"]
-    const problems = useGetProblems(setLoadingProblems)
+const ProblemsTable: React.FC<ProblemsTableProps> = ({loadingProblems, problems}) => {
+    const tableHeader = ["Status", "Title", "Difficulty", "Solution"]
     return (
         <table className="mx-auto w-full max-w-[1200px] text-left text-sm text-gray-500 dark:text-gray-400 sm:w-7/12">
             {!loadingProblems && (<thead className="border-b text-xs uppercase text-gray-700 dark:text-gray-400 ">
@@ -28,9 +27,9 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({setLoadingProblems, loadin
             <tbody className="text-white">
             {problems.map((problem, idx) => {
                 const difficulyColor =
-                    problem.difficulty === "Easy"
+                    problem.difficulty >= 7
                         ? "text-dark-green-s"
-                        : problem.difficulty === "Medium"
+                        : problem.difficulty < 7 && problem.difficulty > 5
                             ? "text-dark-yellow"
                             : "text-dark-pink"
                 return (
@@ -50,9 +49,8 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({setLoadingProblems, loadin
                             </Link>
                         </td>
                         <td className={`px-1 py-2 ${difficulyColor}`}>
-                            {problem.difficulty}
+                            {problem.difficulty} kyu
                         </td>
-                        <td className={"px-1 py-2"}>{problem.category}</td>
                         <td className={"px-1 py-2"}>
                             {problem.link ? (
                                 <a
@@ -71,28 +69,6 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({setLoadingProblems, loadin
             </tbody>
         </table>
     )
-}
-
-function useGetProblems(setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>) {
-    const [problems, setProblems] = useState<DBProblem[]>([]);
-
-    useEffect(() => {
-        const getProblems = async () => {
-            // fetching data logic
-            setLoadingProblems(true);
-            const q = query(collection(firestore, "problems"), orderBy("order", "asc"));
-            const querySnapshot = await getDocs(q);
-            const tmp:DBProblem[] = [];
-            querySnapshot.forEach((doc) => {
-                tmp.push({id: doc.id, ...doc.data()} as DBProblem);
-            });
-            setProblems(tmp);
-            setLoadingProblems(false);
-        };
-
-        getProblems();
-    }, [setLoadingProblems]);
-    return problems;
 }
 
 export default ProblemsTable
