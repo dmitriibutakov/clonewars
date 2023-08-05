@@ -26,7 +26,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem, _solved
         const problemRef = doc(firestore, "problems", problem.id);
         const userDoc = await transaction.get(userRef);
         const problemDoc = await transaction.get(problemRef);
-        return { userDoc, problemDoc, userRef, problemRef };
+        return {userDoc, problemDoc, userRef, problemRef};
     };
 
     const handleLike = async () => {
