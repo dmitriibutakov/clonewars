@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.png" />
         <meta
           name="description"
-          content="Web application that contains leetcode problems and video solutions"
+          content="Clonewars - clone of codewars. Test your knowledge in JavaScript"
         />
       </Head>
       <ToastContainer theme="dark" />

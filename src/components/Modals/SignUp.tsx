@@ -52,6 +52,7 @@ const SignUp: React.FC<SignUpProps> = ({
             createdAt: Date.now(),
             updatedAt: Date.now(),
             likedProblems: [],
+            dislikedProblems: [],
             solvedProblems: [],
             starredProblems: []
           }

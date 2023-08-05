@@ -5,10 +5,13 @@ import {DBProblem} from "@/utils/types/problem";
 import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {firestore} from "@/firebase/firebase";
 import {problems} from "@/utils/problems";
+import useHasMounted from "@/hooks/useHasMounted";
 
 export default function Home() {
     const [loadingProblems, setLoadingProblems] = useState(true)
     const DBproblems = useGetProblems(setLoadingProblems)
+    const hasMounted = useHasMounted();
+    if (!hasMounted) return null;
     return (
         <main className="min-h-screen bg-dark-layer-2">
             <Topbar/>
