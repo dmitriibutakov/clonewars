@@ -12,7 +12,7 @@ import {toast} from "react-toastify";
 
 type ProblemDescriptionProps = {
     problem: Problem
-    _solved?: Boolean
+    _solved: Boolean
 }
 
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem, _solved}) => {
