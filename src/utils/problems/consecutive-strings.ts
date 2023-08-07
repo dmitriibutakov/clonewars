@@ -30,7 +30,6 @@ const handlerConsecutiveStrings = (fn: any) => {
         }
         return true;
     } catch (error: any) {
-        console.log("Consecutive strings function error");
         throw new Error(error);
     }
 };

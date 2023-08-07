@@ -238,7 +238,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem, _solved
                     <strong className="text-white">Input: </strong> {example.inputText}
                           </p>
                          <p className="mb-2">
-                    <strong>Output:</strong>{example.outputText} <br/>
+                    <strong>Output: </strong>{example.outputText} <br/>
                          </p>
                          <p className="mb-2">
                       {example.explanation &&

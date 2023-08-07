@@ -11,7 +11,6 @@ export const growthOfAPopulationHandler = (fn: any) => {
         }
         return true;
     } catch (error: any) {
-        console.log("Error from growthOfAPopulationHandler: ", error);
         throw new Error(error);
     }
 };
@@ -22,7 +21,7 @@ function nbYear(obj) {
 }`;
 
 export const growthOfAPopulation: Problem = {
-    id: "Growth-of-a-Population",
+    id: "growth-of-a-population",
     title: "2. Growth of a Population",
     problemStatement: `<p class='mt-3'>In a small town the population is <code>p0 = 1000</code> at the beginning of a year. The population regularly increases by <code>2</code> percent per year and moreover <code>50</code> new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to <code>p = 1200 inhabitants?</code></p>
 	<p class='mt-3'>More generally given parameters:
