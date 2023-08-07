@@ -23,7 +23,7 @@ const SignIn: React.FC<SignInProps> = ({
                                            inputCallback,
                                        }) => {
     const router = useRouter()
-    const [signInWithEmailAndPassword, user, loading, error] =
+    const [signInWithEmailAndPassword, loading, error] =
         useSignInWithEmailAndPassword(auth)
     const email = inputs.find((el) => el.id === "email")
     const password = inputs.find((el) => el.id === "password")
@@ -52,7 +52,7 @@ const SignIn: React.FC<SignInProps> = ({
     }
     useEffect(() => {
         error &&
-        toast.error(error.message, {
+        toast.error(error, {
             position: "bottom-right",
         })
     }, [error])
