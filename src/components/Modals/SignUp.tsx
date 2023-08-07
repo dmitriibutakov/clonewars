@@ -75,7 +75,7 @@ const SignUp: React.FC<SignUpProps> = ({
     }
     useEffect(() => {
         error &&
-        toast.error(error.message, {
+        toast.error(error, {
             position: "top-center"
         })
     }, [error])
