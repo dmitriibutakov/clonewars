@@ -279,7 +279,7 @@ function useGetCurrentProblem(problemId: string) {
             const docSnap = await getDoc(docRef)
             if (docSnap.exists()) {
                 const problem = docSnap.data() as DBProblem
-                setCurrProblem({id: docSnap.id, ...problem} as DBProblem)
+                setCurrProblem(problem);
                 setProblemDiffClass(
                     problem.difficulty >= 7 ? "bg-olive text-olive" : problem.difficulty > 5 ? "bg-dark-yellow text-dark-yellow" : "bg-dark-pink text-dark-pink"
                 )
