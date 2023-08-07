@@ -3,7 +3,7 @@ import {FiLogOut} from "react-icons/fi"
 import {UserCredential} from "@firebase/auth";
 
 type ButtonProps = {
-    loading: UserCredential | undefined
+    loading?: Boolean
     name: string
     dark?: boolean
     clickCallback?: () => void

@@ -23,8 +23,7 @@ const SignIn: React.FC<SignInProps> = ({
                                            inputCallback,
                                        }) => {
     const router = useRouter()
-    const [signInWithEmailAndPassword, loading, error] =
-        useSignInWithEmailAndPassword(auth)
+    const [signInWithEmailAndPassword, loading, error] = useSignInWithEmailAndPassword(auth);
     const email = inputs.find((el) => el.id === "email")
     const password = inputs.find((el) => el.id === "password")
     const signInHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +68,7 @@ const SignIn: React.FC<SignInProps> = ({
                     inputCallback={inputCallback}
                 />
             ))}
-            <Button loading={loading} name={"sign in"}/>
+            <Button loading={!!loading} name={"sign in"}/>
             <button
                 onClick={clickCallbackForgot}
                 type="submit"

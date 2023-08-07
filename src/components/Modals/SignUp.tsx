@@ -1,12 +1,12 @@
 import Input from "@/components/Input/Input"
 import React, {useEffect} from "react"
-import {AuthModalInput, InputAuthCallback} from "../../utils/types/AuthModalTypes"
 import {auth, firestore} from "@/firebase/firebase"
 import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth"
 import Button from "../Button/Button"
 import {useRouter} from "next/navigation"
 import {toast} from "react-toastify"
 import {doc, setDoc} from "@firebase/firestore";
+import {AuthModalInput, InputAuthCallback} from "@/utils/types/AuthModalTypes";
 
 type SignUpProps = {
     clickCallbackSignIn: () => void
@@ -23,8 +23,7 @@ const SignUp: React.FC<SignUpProps> = ({
                                            inputCallback,
                                        }) => {
     const router = useRouter()
-    const [createUserWithEmailAndPassword, loading, error] =
-        useCreateUserWithEmailAndPassword(auth)
+    const [createUserWithEmailAndPassword, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const email = inputs.find((el) => el.id === "email")
     const password = inputs.find((el) => el.id === "password")
     const name = inputs.find((el) => el.id === "name")
@@ -92,7 +91,7 @@ const SignUp: React.FC<SignUpProps> = ({
                     inputCallback={inputCallback}
                 />
             ))}
-            <Button name={"sign up"} loading={loading}/>
+            <Button name={"sign up"} loading={!!loading}/>
             <div className="text-sm font-medium capitalize text-gray-500">
                 already have an account?
                 <button
