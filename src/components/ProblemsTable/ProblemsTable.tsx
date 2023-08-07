@@ -8,7 +8,6 @@ import {DBProblem} from "@/utils/types/problem";
 import {useAuthState} from "react-firebase-hooks/auth";
 
 type ProblemsTableProps = {
-    setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>
     loadingProblems: Boolean,
     problems: DBProblem[]
 }
