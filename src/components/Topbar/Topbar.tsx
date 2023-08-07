@@ -110,7 +110,7 @@ const Topbar: React.FC<TopbarProps> = ({problemPage}) => {
                         <Button
                             clickCallback={async () => await signOut()}
                             name="logout"
-                            loading={loading}
+                            loading={!!loading}
                             dark={true}
                         />
                     </div>
